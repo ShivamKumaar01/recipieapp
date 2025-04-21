@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Users.hasMany(models.recipies, {
+        foreignKey: 'belongsTo',
+        as: 'recipes'
+      });
     }
   }
   Users.init({
@@ -35,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false,
       validate:{
-        is: /^[a-z]+$/i,
+        // is: /^[a-z]+$/i,
       }
     }
    
@@ -45,3 +49,4 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Users;
 };
+

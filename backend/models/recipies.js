@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      recipies.belongsTo(models.Users, {
+        foreignKey: 'belongsTo',
+        as: 'user'
+      });
     }
   }
   recipies.init({
@@ -37,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     belongsTo: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     }
   }, {
