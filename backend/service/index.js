@@ -1,7 +1,9 @@
 
 module.exports={
-    addUserService:require('./adduser.service'),
+    addUserService:require('./add-user.service'),
     addRecipieService:require('./recipie.service'),
-    loginUserService:require('./loginuser.service'),
-    getByCategoryService:require('./category.service')
+    loginUserService:require('./login-user.service'),
+    getByCategoryService:require('./category.service'),
+    getAllRecipiesService:require('./get-recipies.service'),
+    addFavouriteService:require('./add-fav.service')
 }

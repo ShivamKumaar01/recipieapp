@@ -1,8 +1,10 @@
 
 
 module.exports={
-    addUserController:require('./adduser.controller'),
-    addRecipieController:require('./addRecipie.controller'),
+    addUserController:require('./add-user.controller'),
+    addRecipieController:require('./add-recipie.controller'),
     loginUserController:require('./login-user.controller'),
-    recipieByCategoryController:require('./category.controller')
+    recipieByCategoryController:require('./category.controller'),
+    getaAllRecipieController:require('./get-all-recipie.controller'),
+    addFavController:require('./add-fav.controller')
 }

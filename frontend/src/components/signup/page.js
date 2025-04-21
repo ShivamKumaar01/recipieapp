@@ -2,7 +2,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Image from "next/image";
-import image from "../../../public/image.png";
 import google from "../../../public/google.png";
 import { Divider, Typography } from "@mui/material";
 import Button from "@mui/joy/Button";
@@ -75,8 +74,17 @@ const Signuppage = () => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
 
-  const onSubmit = (data) => {
-    console.log("Submitted Data:", data),
+  const onSubmit = async(data) => {
+    console.log("Submitted Data:", data)
+    // const response=await fetch('http://localhost:8080/user')
+    const signupUser=await fetch("http://localhost:8080/user", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name:data.name,email:data.email,password:data.password})
+    })
     setOpen(true);
 
     setTimeout(() => {

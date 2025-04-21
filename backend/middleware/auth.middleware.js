@@ -6,8 +6,9 @@ const authMiddleware = (req, res, next) => {
   if (!token) return res.status(401).json({ message: "Token missing" });
 
   try {
-    const decoded = jwt.verify(token, "zenmonk"); // same secret
-    req.user = decoded; // Attach user info
+    const decoded = jwt.verify(token, "zenmonk"); 
+    req.user = decoded; 
+    console.log(decoded,"this is decoded")
     next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
