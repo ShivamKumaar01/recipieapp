@@ -17,12 +17,14 @@
     "@mui/joy": "^5.0.0-beta.52",
     "@mui/material": "^7.0.2",
     "@mui/styled-engine-sc": "^7.0.2",
+    "@reduxjs/toolkit": "^2.7.0",
     "dotenv": "^16.5.0",
     "next": "15.3.1",
     "nodemon": "^3.1.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
+    "react-redux": "^9.2.0",
     "styled-components": "^6.1.17",
     "yup": "^1.6.1"
   }

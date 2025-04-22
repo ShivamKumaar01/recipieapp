@@ -12,13 +12,13 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/joy/Button";
-import Checkbox from '@mui/material/Checkbox';
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+import Checkbox from "@mui/material/Checkbox";
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 import google from "../../../public/google.png";
 import facebook from "../../../public/facebook.png";
 import leftimage from "../../../public/left-image.png";
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
 
 const schema = yup.object().shape({
   email: yup
@@ -39,34 +39,55 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   // const navigate=useNavigate();
+  const router = useRouter();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Submitted Data:", data);
-    
+    const signupUser = await fetch("http://localhost:8080/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: data.email, password: data.password }),
+       credentials: 'include'
+    });
+    if (signupUser.ok) {
+      router.push("/dashboard");
+    }
   };
-  function forgotPasswordHandler(){
+  function forgotPasswordHandler() {
     console.log("Forgot Password Button Clicked");
+  }
+  function moveToSignup(){
+    router.push('/signup')
   }
 
   return (
     <>
       <Box
         component="section"
-        sx={{ p: 2, border: "1px dashed grey", display: "flex", height:'100vh' ,width: "100vw",overflowY: "auto"}}
+        sx={{
+          p: 2,
+          display: "flex",
+          height: "100vh",
+          width: "100vw",
+          overflowY: "auto",
+        }}
       >
         {/* left box */}
         <Box
           component="section"
           sx={{
             p: 2,
-            border: "1px dashed grey",
+
             width: "50%",
             backgroundColor: "#F7FAFC",
+
             overflowY: "auto",
-            height:'100vh'
-            
+            height: "100vh",
           }}
         >
           <Box>
@@ -84,7 +105,7 @@ const LoginPage = () => {
           </Box>
 
           {/* olaara ka below part */}
-          <Box border={"1px solid black"} marginLeft={"2%"}>
+          <Box marginLeft={"2%"}>
             <Box>
               <Typography
                 variant="h6"
@@ -99,16 +120,16 @@ const LoginPage = () => {
             </Box>
 
             {/* dont have an account */}
-            <Box display={"flex"} border={"1px solid black"} marginTop={"2%"}>
+            <Box display={"flex"} marginTop={"2%"}onClick={moveToSignup} cursor={'pointer'}>
               <Typography variant="body2" sx={{ color: "grey.600" }}>
                 Dont have an account?{" "}
               </Typography>
-              <Typography color="#3FB6FF">Create now </Typography>
+              <Typography  color="#3FB6FF">Create now </Typography>
             </Box>
 
             {/* form */}
 
-            <Box component="section" sx={{ p: 2, border: "1px dashed grey" }}>
+            <Box component="section" sx={{ p: 2 }}>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
                   label="Email"
@@ -145,13 +166,22 @@ const LoginPage = () => {
                 />
 
                 {/* forgot password */}
-                <Box display={"flex"}justifyContent={"space-between"}>
-                <Checkbox {...label} />
-                    <Typography onClick={forgotPasswordHandler} variant="h6" sx={{  textDecoration: "underline",
-    color: "#3FB6FF",
-    cursor: "pointer",
-    display: "inline-block",
-    ml: 1,}}> Forgot password</Typography>
+                <Box display={"flex"} justifyContent={"space-between"}>
+                  <Checkbox {...label} />
+                  <Typography
+                    onClick={forgotPasswordHandler}
+                    variant="h6"
+                    sx={{
+                      textDecoration: "underline",
+                      color: "#3FB6FF",
+                      cursor: "pointer",
+                      display: "inline-block",
+                      ml: 1,
+                    }}
+                  >
+                    {" "}
+                    Forgot password
+                  </Typography>
                 </Box>
 
                 <Button
@@ -166,76 +196,72 @@ const LoginPage = () => {
             </Box>
             {/* or wala part */}
             <Box display="flex" alignItems="center" width="100%">
-            {/* Left line */}
-            <Box flex={1} height="1px" bgcolor="#A0AEC0" />
+              {/* Left line */}
+              <Box flex={1} height="1px" bgcolor="#A0AEC0" />
 
-            {/* OR Text */}
-            <Typography variant="body2" sx={{ mx: 2, color: "grey.600" }}>
-              or
-            </Typography>
+              {/* OR Text */}
+              <Typography variant="body2" sx={{ mx: 2, color: "grey.600" }}>
+                or
+              </Typography>
 
-            {/* Right line */}
-            <Box flex={1} height="1px" bgcolor="#A0AEC0" />
-          </Box>
-          {/* continue with google and fb bbutton */}
+              {/* Right line */}
+              <Box flex={1} height="1px" bgcolor="#A0AEC0" />
+            </Box>
+            {/* continue with google and fb bbutton */}
 
-          <Box component="section" sx={{ p: 2, border: "1px  black" }}>
-                        <Button
-                          variant="outlined"
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 3,
-                            color: "black",
-                           width:"100%",
-                           borderRadius:"25px"
-                          }}
-                        >
-                         <Image src={google} height={19} width={19} />
-                          Continue with Google
-                         
-                        </Button>
-                      </Box>
+            <Box component="section" sx={{ p: 2, border: "1px  black" }}>
+              <Button
+                variant="outlined"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 3,
+                  color: "black",
+                  width: "100%",
+                  borderRadius: "25px",
+                }}
+              >
+                <Image src={google} height={19} width={19} />
+                Continue with Google
+              </Button>
+            </Box>
 
-
-                      {/* fb */}
-                      <Box component="section" sx={{ p: 2, border: "1px  black" }}>
-                        <Button
-                          variant="outlined"
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 3,
-                            color: "black",
-                           width:"100%",
-                           borderRadius:"25px"
-                          }}
-                        >
-                         <Image src={facebook} height={19} width={19} />
-                         Continue with facebook
-                         
-                        </Button>
-                      </Box>
-
-          
+            {/* fb */}
+            <Box component="section" sx={{ p: 2, border: "1px  black" }}>
+              <Button
+                variant="outlined"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 3,
+                  color: "black",
+                  width: "100%",
+                  borderRadius: "25px",
+                }}
+              >
+                <Image src={facebook} height={19} width={19} />
+                Continue with facebook
+              </Button>
+            </Box>
           </Box>
         </Box>
 
         {/* right box */}
 
-        <Box component="section"
+        <Box
+          component="section"
           sx={{
             p: 2,
-            border: "1px dashed grey",
+
             width: "50%",
             height: "100vh",
-      backgroundImage: `url("/left-image1.png")`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
-      overflowY: "auto",
-          }}>
-        </Box>
+            backgroundImage: `url("/left-image1.png")`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            overflowY: "auto",
+          }}
+        ></Box>
       </Box>
     </>
   );

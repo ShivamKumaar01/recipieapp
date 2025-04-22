@@ -24,6 +24,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import { useRouter } from 'next/navigation';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import rightimg from '../../../public/image.png'
 
 
 const schema = yup.object().shape({
@@ -72,7 +73,9 @@ const Signuppage = () => {
   };
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
-
+    function loginHandler(){
+      router.push('/login')
+    }
 
   const onSubmit = async(data) => {
     console.log("Submitted Data:", data)
@@ -98,29 +101,35 @@ const Signuppage = () => {
     <>
       <Box display={"flex"}>
         {/* here is img */}
+   
         <Box
-          component="section"
-          sx={{ p: 2, border: "1px dashed grey", width: "50%" }}
-        >
-          {/* <Image src={image} width={} height={full}></Image> */}
-        </Box>
+  component="section"
+  sx={{ width: "50%" }}
+>
+  <Image
+    src={rightimg}
+    alt="Signup Banner"
+    width={600}
+    height={600}
+    style={{ objectFit: "cover", width: "100%", height: "100%" }}
+  />
+</Box>
         {/* here is right part */}
         <Box
           component="section"
           sx={{
             p: 2,
-            border: "1px dashed grey",
             width: "50%",
             backgroundColor: "#FFFFFF",
           }}
         >
           {/* upper box */}
-          <Box component="section" sx={{ p: 2, border: "1px dashed grey" }}>
-            <Box component="section" sx={{ p: 2, border: "1px dashed grey" }}>
+          <Box component="section" sx={{ p: 2 }}>
+            {/* <Box component="section" sx={{ p: 2}}> */}
               {/* yaha upper wala image dikha do */}
-            </Box>
+            {/* </Box> */}
 
-            <Box component="section" sx={{ border: "1px dashed grey" }}>
+            <Box component="section" sx={{ }}>
               <Typography
                 variant="h5"
                 sx={{
@@ -136,7 +145,7 @@ const Signuppage = () => {
               </Typography>
             </Box>
 
-            <Box component="section" sx={{ p: 2, border: "1px  black" }}>
+            <Box component="section" sx={{ p: 2,  }}>
               <Button
                 variant="outlined"
                 sx={{
@@ -168,19 +177,8 @@ const Signuppage = () => {
           </Box>
 
           {/* form wala box */}
-          <Box component="section" sx={{ p: 2, border: "1px dashed grey" }}>
+          <Box component="section" sx={{ p: 2}}>
             <form onSubmit={handleSubmit(onSubmit)}>
-              {/* <FormControl fullWidth margin="normal">
-          <InputLabel>Role</InputLabel>
-          <Select {...register("role")} error={!!errors.role}>
-            <MenuItem value="vendor">Vendor</MenuItem>
-            <MenuItem value="user">User</MenuItem>
-          </Select>
-          <Typography variant="caption" color="error">
-            {errors.role?.message}
-          </Typography>
-        </FormControl> */}
-
               <TextField
                 label="Name"
                 fullWidth
@@ -219,28 +217,7 @@ const Signuppage = () => {
                   ),
                 }}
               />
-              {/* <TextField
-          label="Confirm Password"
-          type={showConfirmPassword ? "text" : "password"}
-          fullWidth
-          margin="normal"
-          {...register("confirmPassword")}
-          error={!!errors.confirmPassword}
-          helperText={errors.confirmPassword?.message}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={toggleConfirmPasswordVisibility} edge="end">
-                  {showConfirmPassword ? <MdVisibilityOff /> : <MdOutlineVisibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        /> */}
-
-              {/* <Button type="submit" variant="contained" color="primary" fullWidth >
-          Signup
-        </Button> */}
+              
               <Button
               
                 type="submit"
@@ -253,9 +230,10 @@ const Signuppage = () => {
               {/* already have an account  */}
               <Box
                 display={"flex"}
-                border={"1px solid black"}
+               
                 marginTop={"2%"}
                 justifyContent={"center"}
+                onClick={loginHandler}
               >
                 <Typography variant="body2" sx={{ color: "grey.600" }}>
                   Already have an account?{" "}
@@ -265,7 +243,7 @@ const Signuppage = () => {
 
               <Box
                 sx={{
-                  border: "1px solid black",
+                
                   marginTop: "2%",
                   display: "flex",
                   justifyContent: "center",

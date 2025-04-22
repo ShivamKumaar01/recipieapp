@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {Users}=require('../models')
+
 exports.LoginUser=async(email,password)=>{
     console.log("this is email and password of LoginUser",email,password,"hulu hulu")
 
@@ -30,6 +31,13 @@ exports.LoginUser=async(email,password)=>{
     if(!token){
         throw new Error("Failed to generate token");
     }
+    // cookies().set("token", token, {
+    //     httpOnly: true,
+    //     secure: true,
+    //     sameSite: "strict",
+    //     path: "/",
+    //     maxAge: 60 * 60 * 24,
+    //   });
     return{token,user}
 
 }
